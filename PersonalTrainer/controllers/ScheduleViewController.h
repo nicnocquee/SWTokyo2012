@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ScheduleViewController.h
 //  PersonalTrainer
 //
 //  Created by Nico Prananta on 5/12/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ScheduleViewController : UITableViewController
 
 @end

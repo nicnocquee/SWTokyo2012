@@ -8,7 +8,12 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
+#import "CalendarNoticeViewController.h"
+
+#import "PrettyKitNavigationController.h"
+#import "SCFacebook.h"
+
+#import "LoginViewController.h"
 
 @implementation AppDelegate
 
@@ -19,8 +24,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    self.viewController = [[CalendarNoticeViewController alloc] init];
+    //LoginViewController *login = [[LoginViewController alloc] init];
+    PrettyKitNavigationController *navCon = [[PrettyKitNavigationController alloc] initWithRootViewController:self.viewController];
+    self.window.rootViewController = navCon;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -50,6 +57,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_URL object:url];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_URL object:url];
+    return YES;
 }
 
 @end
