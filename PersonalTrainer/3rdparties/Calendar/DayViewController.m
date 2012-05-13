@@ -70,12 +70,22 @@
     [UIAlertView alertViewWithTitle:@"We have problem, Houston!" message:@"There is disturbance in the force that preventing this app from accessing your calendar"];
 }
 
-- (void)addDummyWorkoutEvent {
+- (void)addDummyWorkoutEvent {  
     EKEventStore *store = [[EKEventStore alloc] init];
-    EKCalendar *calendar = [EKCalendar calendarWithEventStore:store];
-    [calendar setTitle:@"Personal Trainer"];
-    [calendar setCGColor:[[UIColor yellowColor] CGColor]];    
-    [calendar setSource:[[store sources] objectAtIndex:0]];
+  
+    EKCalendar *calendar = [store calendarWithIdentifier:@"PersonalTrainer"];
+  
+    if (!calendar) {
+      // Initialize new calendar if none was created yet
+      calendar = [EKCalendar calendarWithEventStore:store];
+      [calendar setTitle:@"Personal Trainer"];
+      [calendar setCGColor:[[UIColor yellowColor] CGColor]];    
+      [calendar setSource:[[store sources] objectAtIndex:0]];
+    }
+    else {
+      // Calendar already exists, clear it out
+      
+    }
     EKEvent *dummyEvent = [EKEvent eventWithEventStore:store];
     [dummyEvent setTitle:@"All nighter working on Personal Trainer for SWTokyo 2012!"];
     

@@ -24,7 +24,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[CalendarNoticeViewController alloc] init];
+    self.viewController = [[LoginViewController alloc] init];
     //LoginViewController *login = [[LoginViewController alloc] init];
     PrettyKitNavigationController *navCon = [[PrettyKitNavigationController alloc] initWithRootViewController:self.viewController];
     self.window.rootViewController = navCon;

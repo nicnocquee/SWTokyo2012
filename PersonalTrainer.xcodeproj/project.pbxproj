@@ -93,6 +93,7 @@
 		03F995BD155ECA47003A756B /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F995B8155ECA47003A756B /* NSObject+MKBlockAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		03F995BE155ECA47003A756B /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F995BA155ECA47003A756B /* UIActionSheet+MKBlockAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		03F995BF155ECA47003A756B /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F995BC155ECA47003A756B /* UIAlertView+MKBlockAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3592F995155F463C006FA320 /* facebook_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 3592F994155F463C006FA320 /* facebook_login.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -241,6 +242,7 @@
 		03F995BA155ECA47003A756B /* UIActionSheet+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+MKBlockAdditions.m"; sourceTree = "<group>"; };
 		03F995BB155ECA47003A756B /* UIAlertView+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MKBlockAdditions.h"; sourceTree = "<group>"; };
 		03F995BC155ECA47003A756B /* UIAlertView+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		3592F994155F463C006FA320 /* facebook_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_login.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +329,7 @@
 		0353C595155E2F680012953E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3592F994155F463C006FA320 /* facebook_login.png */,
 				0353C626155E580F0012953E /* boy-lean-body2.jpg */,
 				0353C627155E580F0012953E /* boy-muscular-body.jpg */,
 				0353C628155E580F0012953E /* girl-lean-body.jpg */,
@@ -668,6 +671,7 @@
 				0353C64B155E5CAB0012953E /* ModalViewController.xib in Resources */,
 				03F99577155EB7A4003A756B /* FBDialog.bundle in Resources */,
 				03F995AD155EBB2A003A756B /* LoginViewController.xib in Resources */,
+				3592F995155F463C006FA320 /* facebook_login.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

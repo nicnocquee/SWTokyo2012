@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class CalendarNoticeViewController;
+@class LoginViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) CalendarNoticeViewController *viewController;
+@property (strong, nonatomic) LoginViewController *viewController;
 
 @end

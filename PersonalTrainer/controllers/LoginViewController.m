@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "DayViewController.h"
 #import "SCFacebook.h"
 
 @interface LoginViewController ()
@@ -54,6 +55,8 @@
         if (success) {
             NSLog(@"Result: %@", result);
             [self performSelector:@selector(fetchUser) withObject:nil afterDelay:0.2];
+            DayViewController *schedule = [[DayViewController alloc] init];
+            [self.navigationController pushViewController:schedule animated:YES];
         }
     }];
 }
