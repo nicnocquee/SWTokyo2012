@@ -40,6 +40,12 @@
 @property (readonly) MAEvent *event;
 @end
 
+@interface DayViewController () {
+    EKEvent *selectedEvent;
+}
+
+@end
+
 @implementation DayViewController
 
 - (void)loadView {
@@ -63,14 +69,14 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self performSelector:@selector(addDummyWorkoutEvent) withObject:nil afterDelay:1.0];
+    //[self performSelector:@selector(addDummyWorkoutEvent) withObject:nil afterDelay:1.0];
 }
 
 - (void)showCalendarErrorAlert {
     [UIAlertView alertViewWithTitle:@"We have problem, Houston!" message:@"There is disturbance in the force that preventing this app from accessing your calendar"];
 }
 
-- (void)addDummyWorkoutEvent {  
+- (void)addDummyWorkoutEventOnStartDate:(NSDate *)startDate endDate:(NSDate *)endDate{  
     EKEventStore *store = [[EKEventStore alloc] init];
   
     EKCalendar *calendar = [store calendarWithIdentifier:@"PersonalTrainer"];
@@ -87,12 +93,10 @@
       
     }
     EKEvent *dummyEvent = [EKEvent eventWithEventStore:store];
-    [dummyEvent setTitle:@"All nighter working on Personal Trainer for SWTokyo 2012!"];
+    [dummyEvent setTitle:@"Light workout!"];
     
-    NSDate *startDate = [NSDate dateWithDay:13 month:5 year:2012 hour:14 minute:0 second:0];
     [dummyEvent setStartDate:startDate];
-    NSDate *endDate = [NSDate dateWithDay:13 month:5 year:2012 hour:15 minute:0 second:0];
-    [dummyEvent setEndDate:endDate];
+    [dummyEvent setEndDate:[startDate dateByAddingTimeInterval:5*60]];
     [dummyEvent setCalendar:calendar];
     
     NSError *error = nil;
@@ -330,6 +334,7 @@ static NSDate *date = nil;
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:event.title
 													 message:eventInfo delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[alert show];*/
+    selectedEvent = event.ekEvent;
     EKEventEditViewController* controller = [[EKEventEditViewController alloc] init];
     controller.event = event.ekEvent;
     controller.editViewDelegate = self;
@@ -337,6 +342,30 @@ static NSDate *date = nil;
 }
 
 - (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action {
+    if (action == EKEventEditViewActionDeleted) {
+        EKEventStore *store = [[EKEventStore alloc] init];;
+        if (!store) {
+            NSLog(@"no store");
+        }
+        NSError *error = nil;
+        NSPredicate *predicate = [store predicateForEventsWithStartDate:selectedEvent.startDate endDate:selectedEvent.endDate calendars:nil];
+        NSArray *ev = [store eventsMatchingPredicate:predicate];
+        if (ev && ev.count > 0) {
+            for (EKEvent *event in ev) {
+                NSLog(@"Event: %@", event);
+                if ([event.title isEqualToString:selectedEvent.title]) {
+                    [store removeEvent:event span:EKSpanThisEvent commit:YES error:&error];
+                    if (!error) {
+                        
+                        [self addDummyWorkoutEventOnStartDate:event.startDate endDate:event.endDate];
+                        [UIAlertView alertViewWithTitle:NSLocalizedString(@"Workout Session", nil) message:NSLocalizedString(@"Hey! We noticed you have updated your schedule, so we have added new workout session. Workout and be fit!", nil)];
+                    } else {
+                        NSLog(@"Remove error %@", error);
+                    }
+                }
+            }
+        }
+    }
     [self dismissModalViewControllerAnimated:YES];
 }
 
